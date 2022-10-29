@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo-list</title>
+</head>
+<body> 
+
+  <nav class="navbar bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">✅ Todo-list</a>
+    </div>
+  </nav>
+
+  <!--Container for tasks-->
+  <div class="d-flex p-2 overflow-auto flex-grow-1" id="lists-container">
+      <!-- New List Button -->
+      <div class="card-list d-flex flex-column rounded-2 d-flex align-self-start m-1 flex-shrink-0" id="new-list-button-cont">
+        <div type="button" class="btn border border-1 btn-interact box-shadow--2dp" data-bs-toggle="modal" data-bs-target="#nlm" id="new-list-button" data-mode="create">+ Add a new list</div>
+      </div>
+  </div>
+  
+  <!-- Absolute button, triggers new Task modal -->
+  <div type="button" class="btn btn-lg btn-primary rounded-5 box-shadow--4dp position-absolute bottom-0 end-0 m-4" data-bs-toggle="modal" data-bs-target="#ntm" data-mode="create" id="new-task-floating-button">New Task 📝</div>
+  
+  <!-- New Task Modal -->
+  <div class="modal fade" id="ntm" tabindex="-1" aria-labelledby="newtaskModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h1 class="modal-title fs-5" id="newTaskModalLabel">Create new task</h1>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!-- Form, creates new task on submit -->
+            <form id="new-task-form" method="post">
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col">
+                            <label for="ntm-list-select" class="form-label fw-bold">List</label>
+                            <select id="ntm-list-select" name="ntm-list-select" class="form-select" aria-label="List Selection">
+                              </select>
+                        </div>
+                        <div class="col">
+                            <label for="ntm-task-due-date" class="form-label fw-bold">Due Date</label>
+                            <input type="datetime-local" class="form-control" id="ntm-task-due-date" name="task-due-date">
+                            <!--2nd Col-->
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                  <label for="ntm-task-name" class="form-label fw-bold">Task Name</label>
+                  <input type="text" class="form-control" id="ntm-task-name" name="ntm-task-name">
+                  <div id="task-name-helptext" class="form-text">We suggest a short name</div>
+                </div>
+                <div class="mb-3">
+                    <label for="ntm-description-text" class="form-label fw-bold">Description</label>
+                    <textarea class="form-control" id="ntm-description-text" name="ntm-description-text" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <div class="row g-0">
+                        <div class="col col-md-auto">
+                            <label for="priority-form" class="form-label fw-bold">Priority</label>
+                            <div id="priority-form">
+                                <input type="radio" class="btn-check" id="ntm-priority-low" name="priority" value="low">
+                                <label class="btn btn-sm btn-outline-secondary" for="ntm-priority-low">Low</label>
+                        
+                                <input type="radio" class="btn-check" id="ntm-priority-medium" name="priority" value="medium">
+                                <label class="btn btn-sm btn-outline-info" for="ntm-priority-medium">Medium</label>
+                        
+                                <input type="radio" class="btn-check" id="ntm-priority-high" name="priority" value="high">
+                                <label class="btn btn-sm btn-outline-primary" for="ntm-priority-high">High</label>
+
+                                <label class="btn btn-sm btn-close" for="ntm-priority-none"></label>
+                                <input type="radio" class="btn-check" id="ntm-priority-none" name="priority" value="">
+                            </div>
+                        </div>
+                        <dib class="col"></dib>
+                        <div class="col col-md-auto">
+                            <label for="status-form" class="form-label fw-bold">Status</label>
+                            <div id="status-form">
+                                <input type="radio" class="btn-check" id="ntm-status-btn-due" name="status" value="due">
+                                <label class="btn btn-sm btn-outline-warning" for="ntm-status-btn-due">Due</label>
+                                
+                                <input type="radio" class="btn-check" id="ntm-status-btn-progress" name="status" value="progress">
+                                <label class="btn btn-sm btn-outline-primary" for="ntm-status-btn-progress">In Progress</label>
+                                
+                                <input type="radio" class="btn-check" id="ntm-status-btn-completed" name="status" value="completed">
+                                <label class="btn btn-sm btn-outline-success" for="ntm-status-btn-completed">Completed</label>
+
+                                <label class="btn btn-sm btn-close" for="ntm-status-btn-none"></label>
+                                <input type="radio" class="btn-check" id="ntm-status-btn-none" name="status" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="modal-footer pe-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary me-0" id="ntm-submit-btn">Create Task</button>
+                  </div>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New List Modal -->
+  <div class="modal fade" id="nlm" tabindex="-1" aria-labelledby="newlistModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h1 class="modal-title fs-5" id="newListModalLabel">Add new list</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id='new-list-form' action="POST">
+                    <label for="nlm-list-name" class="form-label fw-bold">List name</label>
+                    <input type="text" class="form-control" id="nlm-list-name" name="nlm-list-name">
+                    <div id="list-name-helptext" class="form-text">We suggest a short one</div>
+                    <div class="modal-footer pe-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary me-0" id="nlm-submit-btn">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
